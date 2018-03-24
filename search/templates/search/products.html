@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block active %}
+active
+{% endblock active %}
+
+
+{% block title %}
+{{ block.super }} | Products
+{% endblock title %}
+
+
+{% block content %}
+<h3>Results for: {{ request.GET.q}}</h3>
+
+
+
+<div class="row">
+    
+    {% for obj in object_list %}
+    <div class="col">
+        {{ foorloop.counter }}
+        {% include 'products/snippets/cards.html' with instance=obj %}
+        
+        
+        {% if forloop.counter|divisibleby:3 %}
+    </div></div><div class="row"><div class="col-12"><hr></div></div>
+    {% else %}
+</div>
+{% endif %}
+
+{% endfor %}
+</div>
+
+
+
+
+{% endblock content %}
+
+
+
+

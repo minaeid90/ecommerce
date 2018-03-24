@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+{{ block.super }}|Cart
+{% endblock title %}
+
+
+{% block content %}
+<div class="row">
+  <div class="col">
+    <h2>Cart</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Product</th>
+          <th scope="col">Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for product in cart.products.all %}
+        <tr>
+          
+          <td>{{forloop.counter}}</td>
+          <td>{{product.title}} 
+            {% include "products/snippets/cart_update.html" with product=product cart=cart in_cart=True %}</td>
+            <td>{{product.price}}</td>
+          </tr>
+          {% endfor %}
+          
+          <tr >
+            <td colspan="2"></td>         
+            <td><strong>Subtotal: {{cart.subtotal}}</strong></td>
+          </tr>
+          <tr>
+            <td colspan="2"></td>     
+            <td><strong>Total: {{cart.total}}</strong></td>>
+          </tr> 
+        </tbody>
+      </table>
+    </div>
+  </div>
+  {% endblock content %}
+  
