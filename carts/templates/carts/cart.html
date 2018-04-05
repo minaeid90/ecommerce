@@ -8,38 +8,44 @@
 
 {% block content %}
 <div class="row">
-  <div class="col">
+  <div class="col-12">
     <h2>Cart</h2>
+
     <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Product</th>
-          <th scope="col">Price</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for product in cart.products.all %}
-        <tr>
-          
-          <td>{{forloop.counter}}</td>
-          <td>{{product.title}} 
-            {% include "products/snippets/cart_update.html" with product=product cart=cart in_cart=True %}</td>
-            <td>{{product.price}}</td>
-          </tr>
-          {% endfor %}
-          
-          <tr >
-            <td colspan="2"></td>         
-            <td><strong>Subtotal: {{cart.subtotal}}</strong></td>
-          </tr>
+        <thead>
           <tr>
-            <td colspan="2"></td>     
-            <td><strong>Total: {{cart.total}}</strong></td>>
-          </tr> 
-        </tbody>
-      </table>
-    </div>
+            <th scope="col">#</th>
+            <th scope="col">Product</th>
+            <th scope="col">Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for product in cart.products.all %}
+          <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{product.title}} 
+              {% include "products/snippets/cart_update.html" with product=product cart=cart in_cart=True %}</td>
+              <td>{{product.price}}</td>
+            </tr>
+            {% endfor %}         
+            <tr>
+              <td colspan="2"></td>         
+              <td><strong>Subtotal: {{cart.subtotal}}</strong></td>
+            </tr>
+            <tr>
+              <td colspan="2"></td>     
+              <td><strong>Total: {{cart.total}}</strong></td>>
+            </tr> 
+            <tr>
+              <td colspan="2"></td>     
+              <td><a href="{% url 'cart:checkout' %}" class="btn btn-success">Checkout</a></td>>
+            </tr>
+          </tbody>
+        </table>
+    
   </div>
-  {% endblock content %}
-  
+</div>
+{% endblock content %}
+
+
+

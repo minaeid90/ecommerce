@@ -5,7 +5,9 @@
 {% url 'contact' as contact %}
 {% url 'about' as about %}
 {% url 'cart:home' as cart %}
-
+{% url 'login' as login %}
+{% url 'logout' as logout %}
+{% url 'register' as register %}
 
 <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,7 +32,23 @@
             <li class="nav-item {% if request.path == about %}active{% endif %}">
               <a class="nav-link" href="{{about}}">About</a>
             </li>
-
+            
+            {% if request.user.is_authenticated %}
+            <li class="nav-item {% if request.path == logout %}active{% endif %}">
+              <a class="nav-link" href="{{logout}}">Logout</a>
+            </li>
+            {% else %}
+            <li class="nav-item {% if request.path == login %}active{% endif %}">
+              <a class="nav-link" href="{{login}}">Login</a>
+            </li>
+            <li class="nav-item {% if request.path == register %}active{% endif %}">
+              <a class="nav-link" href="{{register}}">Register</a>
+            </li>
+            {% endif %}
+              
+            
+            
+            
             <li class="nav-item {% if request.path == cart %}active{% endif %} ml-5">
                 <a class="nav-link" href="{{cart}}">{{request.session.cart_items}} <i class="fa fa-shopping-cart"></i></a>
               </li>
